@@ -41,7 +41,9 @@ endm                   ; ket thuc macro
         ; tinh n!
     giaithua:
         cmp n, 0
-        je gt1 
+        je gt1
+	cmp n, 1
+	je gt2 
         
         mov ax, n
         mov bx, 1
@@ -56,7 +58,11 @@ endm                   ; ket thuc macro
     gt1:
         mov kq, 0
         jmp xuat
-        
+	
+    gt2:
+	mov kq, 1
+	jmp xuat	    
+    
     xuat:
         inchuoi tb2
         mov ax, kq
