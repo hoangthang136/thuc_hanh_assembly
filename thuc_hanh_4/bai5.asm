@@ -39,7 +39,7 @@ endm
         
         giaithua:
             cmp n,0
-            je gt1
+            je gt2
             cmp n,1
             je gt2
             
@@ -52,9 +52,6 @@ endm
                 cmp bx, n
                 je xuat
                 jmp lap
-        gt1:
-            mov kq, 0
-            jmp xuat
         gt2:
             mov kq,1
             jmp xuat
