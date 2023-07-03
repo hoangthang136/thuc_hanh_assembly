@@ -27,6 +27,8 @@ endm
         mov ah, 10
         lea dx, masvinput
         int 21h
+        cmp masvinput+1, 8
+        jne err 
     
             ; so sanh chuoi
         cld  ; xoa co DF trong thanh ghi EFlags. Chu yeu la de thao tac 2 thanh ghi si, di
@@ -46,6 +48,7 @@ endm
         repe cmpsb
         je trung
         
+        err:
         inchuoi tb2
         jmp exit
         

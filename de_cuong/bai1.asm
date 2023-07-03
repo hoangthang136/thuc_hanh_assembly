@@ -10,6 +10,7 @@ endm                   ; ket thuc macro
 .data
     tb1 db 'Nhap n: $'
     tb2 db 13,10,'Ket qua: $'
+    tb3 db 13,10,'Vui long nhap so tu nhien!$'
     n dw ?
     tmp dw ?
     kq dw ?
@@ -29,6 +30,10 @@ endm                   ; ket thuc macro
         int 21h
         cmp al, 13
         je  giaithua
+        cmp al, 30h
+        jl err
+        cmp al, 39h
+        jg err
         xor ah, ah
         sub ax, 30h
         mov tmp, ax
@@ -41,9 +46,9 @@ endm                   ; ket thuc macro
         ; tinh n!
     giaithua:
         cmp n, 0
-        je gt1
-	cmp n, 1
-	je gt2 
+        je gt2
+    	cmp n, 1
+    	je gt2 
         
         mov ax, n
         mov bx, 1
@@ -54,10 +59,6 @@ endm                   ; ket thuc macro
             cmp bx, n
             je xuat
             jmp lap
-        
-    gt1:
-        mov kq, 0
-        jmp xuat
 	
     gt2:
 	mov kq, 1
@@ -82,8 +83,12 @@ endm                   ; ket thuc macro
             mov ah, 2
             int 21h
             loop ht
-                
-    
+        jmp exit
+        
+    err:
+        inchuoi tb3
+            
+    exit:
     mov ah, 4ch
     int 21h    
     main endp
